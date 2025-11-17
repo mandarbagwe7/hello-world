@@ -1,0 +1,32 @@
+<h2> {{ authors.length }} Authors</h2>
+<ul>
+    <li *ngFor="let author of authors">
+        {{ author }}
+    </li>
+</ul>
+
+<!-- Style Binding, Class Binding -->
+<button class="btn btn-primary" [class.active] = "isActive" [style.backgroundColor]="isActive ? 'blue': 'white'">Save</button>
+
+<!-- Event Binding and Event Bubbling -->
+<div (click)="onDiv()">
+    <button (click) = "onSave($event)">Event Button</button>
+</div>
+
+<!-- Passing Event to check Enter Key -->
+<!-- <input (keyup)="onKeyUp($event)" /> -->
+
+<!-- Enter key without passing event -->
+<!-- <input (keyup.enter)="onKeyUp()" /> -->
+
+<!-- Passing event to get field value -->
+<!-- <input (keyup.enter)="onKeyUp($event)" /> -->
+
+<!-- Directly passing input field value -->
+<!-- <input #email (keyup.enter)="onKeyUp(email.value)" /> -->
+
+<!-- Two Way Binding -->
+<!-- <input [value]="email" (keyup.enter)="email=$event.target.value; onKeyUp()" /> -->
+
+<!-- Two Way Binding Using ngModel -->
+<input [(ngModel)]="email" (keyup.enter)="onKeyUp()" />
