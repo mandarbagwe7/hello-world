@@ -32,7 +32,6 @@ export class PostsComponent implements OnInit {
         .subscribe(
           post => {
             newPost['id'] = post.id;
-            this.posts.splice(0, 0, newPost);
           }, 
           (error: AppError) => {
             this.posts.splice(0, 1);

@@ -1,67 +1,106 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GithubFollowersService } from './services/github-followers.service';
+import { AppErrorHandler } from './common/app-error-handler';
+import { PostService } from './services/post.service';
 import { HttpModule } from '@angular/http';
+import { SignupFormComponent } from './signup-form/signup-form.component';
+import { SummaryPipe } from './summary.pipe';
+import { AuthorsService } from './authors.service';
+import { CoursesService } from './courses.service';
+import { CoursesComponent } from './courses.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { CoursesComponent } from './courses.component';
 import { CourseComponent } from './course/course.component';
-import { CoursesService } from './courses.service';
 import { AuthorsComponent } from './authors/authors.component';
-import { AuthorsService } from './authors.service';
-import { SummaryPipe } from './summary.pipe';
-import { StarComponent } from './star/star.component';
-import { TitlecaseComponent } from './titlecase/titlecase.component';
-import { TitlecasePipe } from './titlecase.pipe';
-import { BootstrapPanelComponent } from './bootstrap-panel/bootstrap-panel.component';
-import { LikeComponent } from './like/like.component';
+import { FavoriteComponent } from './favorite/favorite.component';
+import { PanelComponent } from './panel/panel.component';
 import { InputFormatDirective } from './input-format.directive';
+import { TitleCasePipe } from './title-case.pipe';
+import { LikeComponent } from './like/like.component';
 import { ZippyComponent } from './zippy/zippy.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
-import { CourseFormComponent } from './course-form/course-form.component';
-import { SignupFormComponent } from './signup-form/signup-form.component';
 import { NewCourseFormComponent } from './new-course-form/new-course-form.component';
-import { ChangePasswordFormComponent } from './change-password-form/change-password-form.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 import { PostsComponent } from './posts/posts.component';
-import { PostsService } from './services/posts.service';
-import { AppErrorHandler } from './common/app-error-handler';
-import { FollowersComponent } from './followers/followers.component';
-import { FollowersService } from './services/followers.service';
+import { GithubFollowersComponent } from './github-followers/github-followers.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { GithubProfileComponent } from './github-profile/github-profile.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ArchiveHomeComponent } from './archive-home/archive-home.component';
+import { ArchivePageComponent } from './archive-page/archive-page.component'; 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CoursesComponent,
+    SignupFormComponent,
     CourseComponent,
+    CoursesComponent,
     AuthorsComponent,
     SummaryPipe,
-    StarComponent,
-    TitlecaseComponent,
-    TitlecasePipe,
-    BootstrapPanelComponent,
-    LikeComponent,
+    FavoriteComponent,
+    PanelComponent,
     InputFormatDirective,
+    TitleCasePipe,
+    LikeComponent,
     ZippyComponent,
     ContactFormComponent,
-    CourseFormComponent,
-    SignupFormComponent,
     NewCourseFormComponent,
-    ChangePasswordFormComponent,
+    ChangePasswordComponent,
     PostsComponent,
-    FollowersComponent
+    GithubFollowersComponent,
+    NavbarComponent,
+    HomeComponent,
+    GithubProfileComponent,
+    NotFoundComponent,
+    ArchiveHomeComponent,
+    ArchivePageComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot([
+      // {
+      //   path: '',
+      //   component: HomeComponent
+      // },
+      // {
+      //   path: 'followers',
+      //   component: GithubFollowersComponent
+      // },
+      // {
+      //   path: 'followers/:id/:username',
+      //   component: GithubProfileComponent
+      // },
+      // {
+      //   path: 'posts',
+      //   component: PostsComponent
+      // },
+      {
+        path: '',
+        component: ArchiveHomeComponent
+      },
+      {
+        path:'archive/:year/:month',
+        component: ArchivePageComponent
+      },
+      {
+        path: '**',
+        component: NotFoundComponent
+      },
+    ])
   ],
   providers: [
+    PostService,
     CoursesService,
     AuthorsService,
-    PostsService,
-    FollowersService,
-    {provide: ErrorHandler, useClass: AppErrorHandler}
+    GithubFollowersService,
+    { provide: ErrorHandler, useClass: AppErrorHandler }
   ],
   bootstrap: [AppComponent]
 })
